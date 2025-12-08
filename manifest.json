@@ -1,0 +1,25 @@
+{
+    "manifest_version": 3,
+    "name": "Font Saver",
+    "version": "1.0",
+    "description": "Save fonts from any website you visit.",
+    "permissions": [
+        "activeTab",
+        "storage",
+        "scripting"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Save Fonts"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ]
+}
