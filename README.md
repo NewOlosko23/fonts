@@ -138,4 +138,5 @@ For issues or feature requests, please file an issue on the repository.
 
 **Version**: 2.0  
 **Last Updated**: December 2025  
-**Author**: Font Saver Team
+**Author**: Collins | [Avodal](https://olosko.onrender.com/)  
+**Portfolio**: [https://olosko.onrender.com/](https://olosko.onrender.com/)
