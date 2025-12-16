@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-  <h2>Font Saver</h2>
-  <button id="scan">Scan Fonts</button>
-  <ul id="fontList"></ul>
+  <div class="header">
+    <h2>Font Saver</h2>
+    <button id="darkModeToggle" class="dark-mode-toggle" title="Toggle Dark Mode">🌙</button>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="current">Current Page</button>
+    <button class="tab" data-tab="saved">Saved Fonts</button>
+  </div>
+
+  <div id="currentView" class="tab-content active">
+    <button id="scan">Scan Fonts</button>
+    <div id="currentUrl" class="url-display"></div>
+    <ul id="fontList"></ul>
+  </div>
+
+  <div id="savedView" class="tab-content">
+    <div class="saved-controls">
+      <input type="text" id="searchInput" placeholder="Search fonts..." class="search-input">
+      <div class="export-buttons">
+        <button id="exportJson" class="btn-small">Export JSON</button>
+        <button id="exportCsv" class="btn-small">Export CSV</button>
+        <label for="importFile" class="btn-small import-label">Import</label>
+        <input type="file" id="importFile" accept=".json" style="display:none;">
+      </div>
+    </div>
+    <div id="savedFontsContainer"></div>
+  </div>
 
   <script src="popup.js"></script>
 </body>
+
 </html>

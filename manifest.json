@@ -1,12 +1,16 @@
 {
     "manifest_version": 3,
     "name": "Font Saver",
-    "version": "1.0",
-    "description": "Save fonts from any website you visit.",
+    "version": "2.0",
+    "description": "Professional font management: discover, save, organize fonts with tags, export/import collections, dark mode & more.",
     "permissions": [
         "activeTab",
+        "tabs",
         "storage",
         "scripting"
+    ],
+    "host_permissions": [
+        "<all_urls>"
     ],
     "action": {
         "default_popup": "popup.html",
