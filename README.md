@@ -8,7 +8,8 @@ A professional-grade Chrome extension for discovering, collecting, and managing 
 - ✅ **Smart Font Detection** - Automatically filters out generic fonts (Arial, sans-serif, etc.)
 - ✅ **Two-Tab Interface** - Separate views for current page and saved collection
 - ✅ **Save Fonts** - One-click saving with source tracking
-- ✅ **Organized Library** - Fonts grouped by source website
+- ✅ **Organized Library** - Fonts grouped by name with multi-site source tracking
+- ✅ **Multi-Site History** - See every website where you've encountered a specific font
 
 ### Advanced Features
 - 📊 **Usage Count** - See how many elements use each font
@@ -40,14 +41,14 @@ A professional-grade Chrome extension for discovering, collecting, and managing 
 1. Review detected fonts in "Current Page" tab
 2. Check usage counts to identify primary fonts
 3. Click **Save** button next to fonts you like
-4. Fonts are saved with source website
+4. Fonts are saved and automatically grouped by font name
 
 ### Managing Collection
 1. Switch to **Saved Fonts** tab
 2. Search fonts by name, site, or tag
-3. Add tags by clicking 🏷️ button
-4. Copy font names with 📋 button
-5. Delete fonts with × button
+3. Add tags by clicking **Tags** button
+4. Copy font names with **Copy** button
+5. Delete specific sources with × button
 
 ### Export & Import
 - **Export JSON**: Full backup with metadata and tags
@@ -55,7 +56,7 @@ A professional-grade Chrome extension for discovering, collecting, and managing 
 - **Import**: Merge collections (auto-detects duplicates)
 
 ### Dark Mode
-- Click 🌙/☀️ in header to toggle
+- Click **Dark/Light** in header to toggle
 - Preference saved across sessions
 
 ## 🎯 Use Cases

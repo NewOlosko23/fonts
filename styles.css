@@ -69,14 +69,12 @@ body.dark-mode .tab-content {
   background: #1a1a1a;
 }
 
-body.dark-mode .font-item,
-body.dark-mode .saved-font-item {
+body.dark-mode .font-item {
   background: #2a2a2a;
   border-color: #444;
 }
 
-body.dark-mode .font-item:hover,
-body.dark-mode .saved-font-item:hover {
+body.dark-mode .font-item:hover {
   background: #333;
 }
 
@@ -87,17 +85,33 @@ body.dark-mode .search-input {
   border-color: #444;
 }
 
-body.dark-mode .site-header {
+body.dark-mode .no-fonts {
+  color: #777;
+}
+
+body.dark-mode .font-group {
+  border-color: #444;
+}
+
+body.dark-mode .font-header {
   background: #2a2a40;
   color: #8891ea;
 }
 
-body.dark-mode .tag {
-  background: #3a3a4a;
-  color: #aaa;
+body.dark-mode .site-item {
+  background: #2a2a2a;
+  border-color: #444;
 }
 
-body.dark-mode .no-fonts {
+body.dark-mode .site-item:hover {
+  background: #333;
+}
+
+body.dark-mode .site-name {
+  color: #e0e0e0;
+}
+
+body.dark-mode .save-date {
   color: #777;
 }
 
@@ -339,58 +353,83 @@ body.dark-mode .action-btn:hover {
   list-style: none;
 }
 
-.site-group {
+/* Grouped Saved Fonts View */
+.font-group {
   margin-bottom: 16px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.site-header {
-  font-size: 12px;
-  font-weight: 600;
-  color: #667eea;
-  padding: 8px 10px;
-  background: #f0f0ff;
-  border-radius: 4px;
-  margin-bottom: 6px;
-}
-
-.saved-fonts-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 0 8px;
-}
-
-.saved-font-item {
+.font-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 10px;
-  margin-bottom: 6px;
-  background: #fafafa;
-  border-radius: 4px;
-  border-left: 3px solid #667eea;
+  padding: 10px 12px;
+  background: #f0f0ff;
+  border-bottom: 1px solid #eee;
+}
+
+.font-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #667eea;
+}
+
+.site-count {
+  font-size: 11px;
+  color: #999;
+  background: rgba(102, 126, 234, 0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.sites-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.site-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: white;
+  border-bottom: 1px solid #f5f5f5;
   transition: all 0.2s;
 }
 
-.saved-font-item:hover {
-  background: #f0f0f0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.site-item:last-child {
+  border-bottom: none;
 }
 
-.font-info {
+.site-item:hover {
+  background: #fafafa;
+}
+
+.site-info {
   flex: 1;
   overflow: hidden;
 }
 
-.font-name-preview {
-  font-size: 14px;
+.site-name {
+  font-size: 13px;
   font-weight: 500;
   color: #333;
+  margin-bottom: 2px;
+}
+
+.save-date {
+  font-size: 11px;
+  color: #999;
   margin-bottom: 4px;
 }
 
-body.dark-mode .font-name-preview,
-body.dark-mode .font-name {
-  color: #e0e0e0;
+.site-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
 }
 
 .tags {
@@ -409,11 +448,6 @@ body.dark-mode .font-name {
   font-weight: 500;
 }
 
-.saved-actions {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-}
 
 .delete-btn {
   width: 26px;
