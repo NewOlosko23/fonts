@@ -21,7 +21,7 @@ function loadDarkMode() {
   chrome.storage.local.get("darkMode", (data) => {
     if (data.darkMode) {
       document.body.classList.add("dark-mode");
-      darkModeToggle.textContent = "☀️";
+      darkModeToggle.textContent = "Light";
     }
   });
 }
@@ -29,7 +29,7 @@ function loadDarkMode() {
 darkModeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
   const isDark = document.body.classList.contains("dark-mode");
-  darkModeToggle.textContent = isDark ? "☀️" : "🌙";
+  darkModeToggle.textContent = isDark ? "Light" : "Dark";
   chrome.storage.local.set({ darkMode: isDark });
 });
 
@@ -130,13 +130,13 @@ function renderFonts(fonts, url, title) {
 
     // Copy button
     const copyBtn = document.createElement("button");
-    copyBtn.textContent = "📋";
+    copyBtn.textContent = "Copy";
     copyBtn.className = "action-btn copy-btn";
     copyBtn.title = "Copy font name";
     copyBtn.addEventListener("click", () => {
       copyToClipboard(fontName);
       copyBtn.textContent = "✓";
-      setTimeout(() => copyBtn.textContent = "📋", 1000);
+      setTimeout(() => copyBtn.textContent = "Copy", 1000);
     });
 
     // Save button
@@ -205,41 +205,58 @@ function renderSavedFonts(searchQuery = "") {
       return;
     }
 
-    // Group fonts by site
-    const fontsBySite = {};
+    // Group fonts by font name
+    const fontsByName = {};
     filteredFonts.forEach(font => {
-      if (!fontsBySite[font.site]) {
-        fontsBySite[font.site] = [];
+      if (!fontsByName[font.name]) {
+        fontsByName[font.name] = [];
       }
-      fontsBySite[font.site].push(font);
+      fontsByName[font.name].push(font);
     });
 
     // Render grouped fonts
-    Object.keys(fontsBySite).sort().forEach(site => {
-      const siteGroup = document.createElement("div");
-      siteGroup.className = "site-group";
+    Object.keys(fontsByName).sort().forEach(fontName => {
+      const fontGroup = document.createElement("div");
+      fontGroup.className = "font-group";
 
-      const siteHeader = document.createElement("div");
-      siteHeader.className = "site-header";
-      siteHeader.textContent = site;
-      siteGroup.appendChild(siteHeader);
+      const fontHeader = document.createElement("div");
+      fontHeader.className = "font-header";
 
-      const fontsList = document.createElement("ul");
-      fontsList.className = "saved-fonts-list";
+      const fontTitle = document.createElement("span");
+      fontTitle.className = "font-title";
+      fontTitle.style.fontFamily = `"${fontName}", sans-serif`;
+      fontTitle.textContent = fontName;
 
-      fontsBySite[site].forEach(font => {
+      const siteCount = document.createElement("span");
+      siteCount.className = "site-count";
+      const count = fontsByName[fontName].length;
+      siteCount.textContent = count === 1 ? "1 site" : `${count} sites`;
+
+      fontHeader.appendChild(fontTitle);
+      fontHeader.appendChild(siteCount);
+      fontGroup.appendChild(fontHeader);
+
+      const sitesList = document.createElement("ul");
+      sitesList.className = "sites-list";
+
+      fontsByName[fontName].forEach(font => {
         const li = document.createElement("li");
-        li.className = "saved-font-item";
+        li.className = "site-item";
 
-        const fontInfo = document.createElement("div");
-        fontInfo.className = "font-info";
+        const siteInfo = document.createElement("div");
+        siteInfo.className = "site-info";
 
-        const fontNameDiv = document.createElement("div");
-        fontNameDiv.className = "font-name-preview";
-        fontNameDiv.style.fontFamily = `"${font.name}", sans-serif`;
-        fontNameDiv.textContent = font.name;
+        const siteName = document.createElement("div");
+        siteName.className = "site-name";
+        siteName.textContent = font.site;
 
-        fontInfo.appendChild(fontNameDiv);
+        const saveDate = document.createElement("div");
+        saveDate.className = "save-date";
+        const date = new Date(font.savedAt);
+        saveDate.textContent = `Saved ${date.toLocaleDateString()}`;
+
+        siteInfo.appendChild(siteName);
+        siteInfo.appendChild(saveDate);
 
         // Tags
         if (font.tags && font.tags.length > 0) {
@@ -251,37 +268,37 @@ function renderSavedFonts(searchQuery = "") {
             tagSpan.textContent = tag;
             tagsDiv.appendChild(tagSpan);
           });
-          fontInfo.appendChild(tagsDiv);
+          siteInfo.appendChild(tagsDiv);
         }
 
         const actions = document.createElement("div");
-        actions.className = "saved-actions";
+        actions.className = "site-actions";
 
-        // Copy button
+        // Copy button (copy font name)
         const copyBtn = document.createElement("button");
-        copyBtn.textContent = "📋";
+        copyBtn.textContent = "Copy";
         copyBtn.className = "action-btn copy-btn";
         copyBtn.title = "Copy font name";
         copyBtn.addEventListener("click", () => {
           copyToClipboard(font.name);
           copyBtn.textContent = "✓";
-          setTimeout(() => copyBtn.textContent = "📋", 1000);
+          setTimeout(() => copyBtn.textContent = "Copy", 1000);
         });
 
         // Edit tags button
         const editBtn = document.createElement("button");
-        editBtn.textContent = "🏷️";
+        editBtn.textContent = "Tags";
         editBtn.className = "action-btn edit-btn";
         editBtn.title = "Edit tags";
         editBtn.addEventListener("click", () => {
           editTags(font);
         });
 
-        // Delete button
+        // Delete button (delete this specific font+site combination)
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "×";
         deleteBtn.className = "delete-btn";
-        deleteBtn.title = "Delete this font";
+        deleteBtn.title = "Delete from this site";
         deleteBtn.addEventListener("click", () => {
           deleteFont(font.name, font.url);
         });
@@ -290,13 +307,13 @@ function renderSavedFonts(searchQuery = "") {
         actions.appendChild(editBtn);
         actions.appendChild(deleteBtn);
 
-        li.appendChild(fontInfo);
+        li.appendChild(siteInfo);
         li.appendChild(actions);
-        fontsList.appendChild(li);
+        sitesList.appendChild(li);
       });
 
-      siteGroup.appendChild(fontsList);
-      savedFontsContainer.appendChild(siteGroup);
+      fontGroup.appendChild(sitesList);
+      savedFontsContainer.appendChild(fontGroup);
     });
   });
 }
